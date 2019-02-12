@@ -18,6 +18,11 @@ class ArtistController extends Controller
         return $this->formatOutput($mpc->artists($request->input('count'), $request->input('offset')));
     }
 
+    public function albums(Request $request, MPDService $mpc, $id)
+    {
+        return $this->formatOutput($mpc->albums(rawurldecode($id), $request->input('count'), $request->input('offset')));
+    }
+
     private function formatOutput($data)
     {
         return array_map(

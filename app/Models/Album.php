@@ -4,14 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class BaseModel extends Model
+class Album extends BaseModel
 {
-    public $id;
-    public $name;
+    public $year;
 
     public function __construct(string $name)
     {
-        $this->id = rawurlencode($name);
-        $this->name = $name;
+        parent::__construct($name);
     }
 }
