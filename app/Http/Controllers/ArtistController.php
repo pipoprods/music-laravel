@@ -12,4 +12,17 @@ class ArtistController extends Controller
     {
         return count($mpc->artists());
     }
+
+    public function index(Request $request, MPDService $mpc)
+    {
+        return $this->formatOutput($mpc->artists($request->input('count'), $request->input('offset')));
+    }
+
+    private function formatOutput($data)
+    {
+        return array_map(
+                function ($item) { return get_object_vars($item); },
+                $data
+            );
+    }
 }

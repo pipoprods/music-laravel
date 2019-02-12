@@ -3,15 +3,20 @@
 namespace App\Services;
 
 use MPD;
+use App\Models\Artist;
 
 class MPDService
 {
     private $mpc;
 
-    public function artists()
+    public function artists(int $count = null, int $offset = null)
     {
         $this->mpc || $this->connect();
-        return ($this->mpc->list_artists());
+        $artists = $this->mpc->list_artists();
+        return array_map(
+                function($a) { return new Artist($a); },
+                (isset($count) && isset($offset)) ? array_slice($artists, $offset * $count, $count) : $artists
+            );
     }
 
     private function connect()

@@ -14,3 +14,4 @@ use Illuminate\Http\Request;
 */
 
 Route::get('/artist/count', 'ArtistController@count');
+Route::get('/artist', 'ArtistController@index');
